@@ -1,0 +1,66 @@
+:root {
+    --bg: #fff7e6;
+    --card: #ffffff;
+    --text: #2b2b2b;
+    --muted: #7a7a7a;
+    --accent: #ff6b6b;
+    --chip: #ffe9c7;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17141f; --card: #231f2e; --text: #f2eef8; --muted: #a79fb8; --chip: #342d45;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17141f; --card: #231f2e; --text: #f2eef8; --muted: #a79fb8; --chip: #342d45;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--bg); }
+  body {
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; justify-content: center;
+    padding: 24px 16px;
+  }
+  main { width: 100%; max-width: 480px; text-align: center; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .moods { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+  .moods button {
+    border: 2px solid transparent; background: var(--chip); color: var(--text);
+    padding: 10px 16px; border-radius: 999px; font-size: 1rem; cursor: pointer;
+    transition: transform .15s, border-color .15s;
+  }
+  .moods button:hover { transform: translateY(-2px); }
+  .moods button.active { border-color: var(--accent); }
+  .card {
+    background: var(--card); border-radius: 20px; padding: 32px 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12); min-height: 300px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  }
+  #emoji { font-size: 110px; line-height: 1; display: inline-block; user-select: none; }
+  #caption { font-size: 1.25rem; font-weight: 700; margin: 0; }
+  #again {
+    border: 0; background: var(--accent); color: #fff; padding: 10px 20px;
+    border-radius: 12px; font-size: 1rem; cursor: pointer;
+  }
+  #again[hidden] { display: none; }
+  .hint { color: var(--muted); }
+
+  /* emoji animations, one per mood */
+  .a-tired  { animation: tired 3s ease-in-out infinite; transform-origin: bottom center; }
+  .a-hungry { animation: hungry .7s ease-in-out infinite; }
+  .a-broke  { animation: broke .35s linear infinite; }
+  .a-happy  { animation: happy 1.2s ease-in-out infinite; }
+  .a-stress { animation: stress .12s linear infinite; }
+  .a-bored  { animation: bored 4s ease-in-out infinite; }
+  @keyframes tired  { 0%,100% { transform: rotate(-12deg); } 50% { transform: rotate(12deg) translateY(8px); } }
+  @keyframes hungry { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2) translateY(-10px); } }
+  @keyframes broke  { 0%,100% { transform: translateX(-4px); } 50% { transform: translateX(4px); } }
+  @keyframes happy  { 0% { transform: rotate(0) scale(1); } 50% { transform: rotate(180deg) scale(1.2); } 100% { transform: rotate(360deg) scale(1); } }
+  @keyframes stress { 0%,100% { transform: translate(2px,-2px); } 50% { transform: translate(-2px,2px); } }
+  @keyframes bored  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-24px); } }
+  @media (prefers-reduced-motion: reduce) { #emoji { animation: none !important; } }
